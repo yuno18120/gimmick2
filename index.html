@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="mycanvas"></canvas>
+
+    <script>
+        let canvas = document.getElementById("mycanvas");
+        let c = canvas.getContext("2d");
+
+        function setsize() {
+            canvas.width = document.documentElement.clientWidth-10;
+            canvas.height = document.documentElement.clientHeight-20;
+
+            c.beginPath();
+            c.fillStyle = "black";
+            c.rect(0, 0, canvas.width, canvas.height);
+            c.fill();
+            c.closePath();
+        }
+
+        setInterval(setsize,100);
+    </script>
+</body>
+
+</html>
