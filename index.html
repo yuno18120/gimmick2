@@ -20,8 +20,8 @@
         let c = canvas.getContext("2d");
 
         let x = 0;  //加速度を格納する
-        let ballX;
-        let ballY;
+        let ballX = 30;
+        let ballY = 30;
         let v = 1;
 
         let stage =
@@ -68,19 +68,19 @@
             //drawstage();
 
             c.beginPath();
-            c.arc(30,30,20,0,Math.PI*2);
+            c.arc(ballX,ballY,20,0,Math.PI*2);
             c.fillStyle = "black";
             c.fill();
             c.closePath();
 
-            //ballX += v*x;
+            ballX += v*x;
         }
 
         function deviceMotion(e){
             x = e.accelerationIncludingGravity.x;
         }
 
-        setInterval(main,1);
+        setInterval(main,0.1);
 
         setInterval(setsize, 100);
     </script>
