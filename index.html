@@ -70,11 +70,11 @@
             // ボールの動く範囲を制限(canvasの端)
             if(ballX >= canvas.width-ballSize || ballX <= 0+ballSize){
                 ballX = 30;
-                ballY = 30;
+                ballY = 120;
             }
             if(ballY >= canvas.height-ballSize || ballY <= 0+ballSize){
                 ballX = 30;
-                ballY = 30;
+                ballY = 120;
             }
             // ボールの動く範囲を制限(stageの端)
            for(let i=0; i<stage.length; i++){
@@ -82,11 +82,11 @@
                     if(stage[i][j] == 1){
                         if(ballX+ballSize >= canvas.width/(stage[i].length)*j || ballX-ballSize <= canvas.width/(stage[i].length)*j){
                             ballX = 30;
-                            ballY = 30;
+                            ballY = 120;
                         }
                         if(ballY+ballSize >= canvas.height/stage.length*i || ballY-ballSize <= canvas.height/stage.length*i){
                             ballX = 30;
-                            ballY = 30;
+                            ballY = 120;
                         }
                     }
                 }
