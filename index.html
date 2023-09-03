@@ -85,8 +85,10 @@
             // ボールの動く範囲を制限
             if(ballX >= canvas.width-ballSize || ballX <= 0+ballSize){
                 ballX = 30;
+                ballY = 30;
             }
             if(ballY >= canvas.height-ballSize || ballY <= 0+ballSize){
+                ballX = 30;
                 ballY = 30;
             }
 
