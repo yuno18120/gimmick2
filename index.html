@@ -82,14 +82,18 @@
             c.fill();
             c.closePath();
 
-
             ballX += v*(x*(-1));
+            ballY += v*(x*(-1));
         }
 
         function deviceMotion(e){
             x = e.accelerationIncludingGravity.x;
+            y = e.accelerationIncludingGravity.y;
             if(Math.abs(x) <= 0.1){
                 x = 0;
+            }
+            if(Math.abs(y) <= 0.1){
+                y  = 0;
             }
         }
 
