@@ -11,21 +11,67 @@
     <canvas id="mycanvas"></canvas>
 
     <script>
+
+        window.addEventListener("devicemotion",deviceMotion);
+
         let canvas = document.getElementById("mycanvas");
         let c = canvas.getContext("2d");
 
-        function setsize() {
-            canvas.width = document.documentElement.clientWidth-15;
-            canvas.height = document.documentElement.clientHeight-20;
+        let x = 0;
+        let y = 0;
 
-            c.beginPath();
-            c.fillStyle = "black";
-            c.rect(0, 0, canvas.width, canvas.height);
-            c.fill();
-            c.closePath();
+        let stage =
+            [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+             [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+             [0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+             [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+             [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ]
+
+        function setsize() {
+            canvas.width = document.documentElement.clientWidth - 15;
+            canvas.height = document.documentElement.clientHeight - 20;
         }
 
-        setInterval(setsize,100);
+        /*function drawstage(){
+            for(let i=0; i<stage.length; i++){
+                for(let j=0; j<stage[i].length; j++){
+                    if(stage[i][j] == 1){
+                        c.beginPath();
+                        c.rect(canvas.width/(stage[i].length)*j,canvas.height/(stage.length)*i,canvas.width/(stage[i].length),canvas.height/(stage.length));
+                        c.fillStyle = "white";
+                        c.strokeStyle = "white";
+                        c.fill();
+                        c.closePath();
+                    }else if(stage[i][j] == 0){
+                        c.beginPath();
+                        c.rect(canvas.width/(stage[i].length)*j,canvas.height/(stage.length)*i,canvas.width/(stage[i].length),canvas.height/(stage.length));
+                        c.fillStyle = "black";
+                        c.strokeStyle = "black";
+                        c.fill();
+                        c.closePath();
+                    }
+                }
+            }
+        }*/
+
+        function main(){
+            //drawstage();
+        }
+
+        function deviceMotion(e){
+            x = e.acceleration.x;
+            y = e.accelerationIncludingGravity.x;
+        }
+
+        setInterval(main,0.1);
+
+        setInterval(setsize, 100);
     </script>
 </body>
 
