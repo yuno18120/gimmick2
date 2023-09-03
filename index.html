@@ -88,7 +88,7 @@
 
         function deviceMotion(e){
             x = e.accelerationIncludingGravity.x;
-            y = e.accelerationIncludingGravity.z;
+            y = e.accelerationIncludingGravity.y;
             if(Math.abs(x) <= 0.1){
                 x = 0;
             }
