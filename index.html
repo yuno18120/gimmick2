@@ -19,9 +19,10 @@
         let canvas = document.getElementById("mycanvas");
         let c = canvas.getContext("2d");
 
-        let x = 0;  //加速度を格納する
+        let x = 0;  //加速度xを格納する
+        let y = 0;  //加速度yを格納する
         let ballX = 30;
-        let ballY = 30;
+        let ballY = 125;
         let ballSize = 20;
         let v = 1;
 
@@ -43,7 +44,7 @@
             canvas.height = document.documentElement.clientHeight - 20;
         }
 
-        /*function drawstage(){
+        function drawstage(){
             for(let i=0; i<stage.length; i++){
                 for(let j=0; j<stage[i].length; j++){
                     if(stage[i][j] == 1){
@@ -63,26 +64,10 @@
                     }
                 }
             }
-        }*/
+        }
 
-        function main() {
-            //drawstage();
-
-            // 背景を描画
-            c.beginPath();
-            c.rect(0, 0, canvas.width, canvas.height);
-            c.fillStyle = "white";
-            c.fill();
-            c.closePath();
-
-            // ボールを描画
-            c.beginPath();
-            c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
-            c.fillStyle = "black";
-            c.fill();
-            c.closePath();
-
-            // ボールの動く範囲を制限
+        function ballLimit(){
+            // ボールの動く範囲を制限(canvasの端)
             if(ballX >= canvas.width-ballSize || ballX <= 0+ballSize){
                 ballX = 30;
                 ballY = 30;
@@ -91,6 +76,39 @@
                 ballX = 30;
                 ballY = 30;
             }
+            // ボールの動く範囲を制限(stageの端)
+           for(let i=0; i<stage.length; i++){
+                for(let j=0; j<stage[i].length; j++){
+                    if(stage[i][j] == 1){
+                        if(ballX+ballSize >= canvas.width/(stage[i].length)*j || ballX-ballSize <= canvas.width/(stage[i].length)*j){
+                            ballX = 30;
+                            ballY = 30;
+                        }
+                        if(ballY+ballSize >= canvas.height/stage.length*i || ballY-ballSize <= canvas.height/stage.length*i){
+                            ballX = 30;
+                            ballY = 30;
+                        }
+                    }
+                }
+            }
+        }
+
+        function main() {
+            drawstage();
+
+            /*// 背景を描画
+            c.beginPath();
+            c.rect(0, 0, canvas.width, canvas.height);
+            c.fillStyle = "white";
+            c.fill();
+            c.closePath();*/
+
+            // ボールを描画
+            c.beginPath();
+            c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+            c.fillStyle = "black";
+            c.fill();
+            c.closePath();
 
             //速度を計算
             ballX += v * (x * (-1));
