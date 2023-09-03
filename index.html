@@ -65,21 +65,23 @@
         }*/
 
         function drawback(){
-            c.beginPath();
-            c.rect(0,0,canvas.width,canvas.height);
-            c.fillStyle = "white";
-            c.fill();
-            c.closePath();
         }
 
         function main(){
             //drawstage();
 
             c.beginPath();
+            c.rect(0,0,canvas.width,canvas.height);
+            c.fillStyle = "white";
+            c.fill();
+            c.closePath();
+
+            c.beginPath();
             c.arc(ballX,ballY,20,0,Math.PI*2);
             c.fillStyle = "black";
             c.fill();
             c.closePath();
+
 
             ballX += v*(x*(-1));
 
@@ -93,9 +95,8 @@
             }
         }
 
-        setInterval(main,10);
-        setInterval(drawback,1);
-
+        setInterval(main,1);
+        
         setInterval(setsize, 1000);
     </script>
 </body>
