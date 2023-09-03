@@ -68,6 +68,12 @@
             //drawstage();
 
             c.beginPath();
+            c.rect(0,0,canvas.width,canvas.height);
+            c.fillStyle = "white";
+            c.fill();
+            c.closePath();
+
+            c.beginPath();
             c.arc(ballX,ballY,20,0,Math.PI*2);
             c.fillStyle = "black";
             c.fill();
