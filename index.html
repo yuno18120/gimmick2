@@ -73,7 +73,7 @@
             c.fill();
             c.closePath();
 
-            ballX += v*x;
+            ballX += v*(x*(-1));
 
             document.getElementById("t1").innerText = ballX;
         }
@@ -82,7 +82,7 @@
             x = e.accelerationIncludingGravity.x;
         }
 
-        setInterval(main,0.1);
+        setInterval(main,1);
 
         setInterval(setsize, 100);
     </script>
