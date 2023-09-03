@@ -84,19 +84,17 @@
 
 
             ballX += v*(x*(-1));
-
-            document.getElementById("t1").innerText = ballX;
         }
 
         function deviceMotion(e){
             x = e.accelerationIncludingGravity.x;
-            if(x <= 0.1){
+            if(Math.abs(x) <= 0.1){
                 x = 0;
             }
         }
 
         setInterval(main,1);
-        
+
         setInterval(setsize, 1000);
     </script>
 </body>
