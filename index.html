@@ -88,9 +88,12 @@
 
         function deviceMotion(e){
             x = e.accelerationIncludingGravity.x;
+            if(x <= 0.1){
+                x = 0;
+            }
         }
 
-        setInterval(main,1);
+        setInterval(main,10);
         setInterval(drawback,1);
 
         setInterval(setsize, 1000);
