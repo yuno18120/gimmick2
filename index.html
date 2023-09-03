@@ -19,8 +19,10 @@
         let canvas = document.getElementById("mycanvas");
         let c = canvas.getContext("2d");
 
-        let x = 0;
-        let y = 0;
+        let x = 0;  //加速度を格納する
+        let ballX;
+        let ballY;
+        let v = 1;
 
         let stage =
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,18 +66,23 @@
 
         function main(){
             //drawstage();
-            document.getElementById("t1").innerText = x;
-            document.getElementById("t2").innerText = y;
+
+            c.beginPath();
+            c.arc(ballX,ballY,20,0,Math.PI*2);
+            c.fillStyle = "balck";
+            c.fill();
+            c.closePath();
+
+            ballX += v*x;
         }
 
         function deviceMotion(e){
-            x = e.acceleration.x;
-            y = e.accelerationIncludingGravity.x;
+            x = e.accelerationIncludingGravity.x;
         }
 
         setInterval(main,1);
 
-        //setInterval(setsize, 100);
+        setInterval(setsize, 100);
     </script>
 </body>
 
