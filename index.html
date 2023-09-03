@@ -14,7 +14,7 @@
 
     <script>
 
-        window.addEventListener("devicemotion",deviceMotion);
+        window.addEventListener("devicemotion", deviceMotion);
 
         let canvas = document.getElementById("mycanvas");
         let c = canvas.getContext("2d");
@@ -22,19 +22,20 @@
         let x = 0;  //加速度を格納する
         let ballX = 30;
         let ballY = 30;
+        let ballSize = 20;
         let v = 1;
 
         let stage =
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-             [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-             [0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-             [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
-             [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
-             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             ]
 
         function setsize() {
@@ -64,42 +65,50 @@
             }
         }*/
 
-        function drawback(){
-        }
-
-        function main(){
+        function main() {
             //drawstage();
 
+            // 背景を描画
             c.beginPath();
-            c.rect(0,0,canvas.width,canvas.height);
+            c.rect(0, 0, canvas.width, canvas.height);
             c.fillStyle = "white";
             c.fill();
             c.closePath();
 
+            // ボールを描画
             c.beginPath();
-            c.arc(ballX,ballY,20,0,Math.PI*2);
+            c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
             c.fillStyle = "black";
             c.fill();
             c.closePath();
 
-            ballX += v*(x*(-1));
-            ballY += v*y;
+            // ボールの動く範囲を制限
+            if(ballX >= canvas.width-ballSize || ballX <= 0+ballSize){
+                ballX = 30;
+            }
+            if(ballY >= canvas.height-ballSize || ballY <= 0+ballSize){
+                ballY = 30;
+            }
+
+            //速度を計算
+            ballX += v * (x * (-1));
+            ballY += v * y;
         }
 
-        function deviceMotion(e){
+        function deviceMotion(e) {
             x = e.accelerationIncludingGravity.x;
             y = e.accelerationIncludingGravity.y;
-            if(Math.abs(x) <= 0.1){
+            if (Math.abs(x) <= 0.1) {
                 x = 0;
             }
-            if(Math.abs(y) <= 0.1){
-                y  = 0;
+            if (Math.abs(y) <= 0.1) {
+                y = 0;
             }
         }
 
-        setInterval(main,1);
+        setsize();
 
-        setInterval(setsize, 1000);
+        setInterval(main, 1);
     </script>
 </body>
 
