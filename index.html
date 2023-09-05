@@ -31,12 +31,12 @@
             [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 1, 1, 0, 1, 1, 1, 0, 0, 0],
-            [0, 1, 0, 0, 1, 0, 1, 1, 0, 0],
-            [0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
-            [0, 1, 1, 1, 1, 0, 0, 1, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 1, 1, 1]/*,
             [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
             [0, 1, 1, 0, 1, 1, 1, 0, 0, 0],
@@ -46,8 +46,20 @@
             [0, 0, 0, 0, 0, 1, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]*/
             ];
+
+        let stageColor =
+            [[2, 1, 2, 2, 3, 2, 1, 3, 2, 1],
+            [1, 2, 3, 3, 2, 1, 2, 1, 3, 1],
+            [1, 2, 1, 3, 1, 1, 3, 2, 2, 3],
+            [3, 1, 2, 1, 3, 2, 3, 3, 2, 1],
+            [3, 2, 3, 1, 2, 2, 1, 1, 1, 2],
+            [2, 1, 2, 2, 1, 1, 2, 1, 3, 2],
+            [1, 2, 2, 3, 1, 3, 1, 2, 3, 1],
+            [2, 1, 3, 1, 2, 3, 1, 2, 1, 2],
+            [2, 3, 1, 2, 1, 2, 3, 3, 2, 1],
+            [3, 2, 2, 1, 3, 2, 3, 1, 2, 3]];
 
         function setsize() {
             canvas.width = document.documentElement.clientWidth - 15;
@@ -56,7 +68,7 @@
             if (canvas.width / stage[0].length < canvas.height / stage.length) {
                 ballX = canvas.width / stage[0].length * 0.5;
                 ballY = canvas.height / stage.length * 1.5;
-                ballSize = canvas.width / stage[0].length / 3;
+                ballSize = canvas.width / stage[0].length / 3; // basicは4
             } else {
                 ballX = canvas.width / stage[0].length * 0.5;
                 ballY = canvas.height / stage.length * 1.5;
@@ -67,7 +79,7 @@
         function drawstage() {
             for (let i = 0; i < stage.length; i++) {
                 for (let j = 0; j < stage[i].length; j++) {
-                    if (stage[i][j] == 1) {
+                    /*if (stage[i][j] == 1) {
                         c.beginPath();
                         c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
                         c.fillStyle = "white";
@@ -79,6 +91,31 @@
                         c.beginPath();
                         c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
                         c.fillStyle = "black";
+                        c.stroke();
+                        c.fill();
+                        c.closePath();
+                    }*/
+
+                    if(stageColor[i][j] == 1){
+                        c.beginPath();
+                        c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
+                        c.fillStyle = "red";
+                        c.strokeStyle = "white";
+                        c.lineWidth = 2;
+                        c.stroke();
+                        c.fill();
+                        c.closePath();
+                    }else if(stageColor[i][j] == 2){
+                        c.beginPath();
+                        c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
+                        c.fillStyle = "blue";
+                        c.stroke();
+                        c.fill();
+                        c.closePath();
+                    }else if(stageColor[i][j] == 3){
+                        c.beginPath();
+                        c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
+                        c.fillStyle = "yellow";
                         c.stroke();
                         c.fill();
                         c.closePath();
@@ -157,7 +194,7 @@
             // ボールを描画
             c.beginPath();
             c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
-            c.fillStyle = "red";
+            c.fillStyle = "white";
             c.fill();
             c.closePath();
 
