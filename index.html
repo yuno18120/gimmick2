@@ -68,11 +68,11 @@
             if (canvas.width / stage[0].length < canvas.height / stage.length) {
                 ballX = canvas.width / stage[0].length * 0.5;
                 ballY = canvas.height / stage.length * 1.5;
-                ballSize = canvas.width / stage[0].length / 3; // basicは4
+                ballSize = canvas.width / stage[0].length / 4; // basicは4
             } else {
                 ballX = canvas.width / stage[0].length * 0.5;
                 ballY = canvas.height / stage.length * 1.5;
-                ballSize = canvas.height / stage.length / 3;
+                ballSize = canvas.height / stage.length / 4;
             }
         }
 
@@ -195,6 +195,8 @@
             c.beginPath();
             c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
             c.fillStyle = "white";
+            c.strokeStyle = "black";
+            c.stroke();
             c.fill();
             c.closePath();
 
