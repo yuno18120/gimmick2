@@ -21,9 +21,9 @@
 
         let x = 0;  //加速度xを格納する
         let y = 0;  //加速度yを格納する
-        let ballX = 30;
-        let ballY = 125;
-        let ballSize = 20;
+        let ballX;
+        let ballY;
+        let ballSize;
         let v = 1;
 
         let stage =
@@ -37,28 +37,39 @@
             [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            ]
+            ];
 
         function setsize() {
             canvas.width = document.documentElement.clientWidth - 15;
             canvas.height = document.documentElement.clientHeight - 20;
+
+            if (canvas.width / stage[0].length < canvas.height / stage.length) {
+                ballX = canvas.width / stage[0].length/2;
+                ballY = canvas.height / stage.length * 1.5;
+                ballSize = canvas.width / stage[0].length / 4;
+            } else {
+                ballX = canvas.width / stage[0].length/2;
+                ballY = canvas.height / stage.length * 1.5;
+                ballSize = canvas.height / stage.length / 4;
+            }
         }
 
-        function drawstage(){
-            for(let i=0; i<stage.length; i++){
-                for(let j=0; j<stage[i].length; j++){
-                    if(stage[i][j] == 1){
+        function drawstage() {
+            for (let i = 0; i < stage.length; i++) {
+                for (let j = 0; j < stage[i].length; j++) {
+                    if (stage[i][j] == 1) {
                         c.beginPath();
-                        c.rect(canvas.width/(stage[i].length)*j,canvas.height/(stage.length)*i,canvas.width/(stage[i].length),canvas.height/(stage.length));
+                        c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
                         c.fillStyle = "white";
-                        c.strokeStyle = "white";
+                        c.strokeStyle = "red";
+                        c.stroke();
                         c.fill();
                         c.closePath();
-                    }else if(stage[i][j] == 0){
+                    } else if (stage[i][j] == 0) {
                         c.beginPath();
-                        c.rect(canvas.width/(stage[i].length)*j,canvas.height/(stage.length)*i,canvas.width/(stage[i].length),canvas.height/(stage.length));
+                        c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
                         c.fillStyle = "black";
-                        c.strokeStyle = "black";
+                        c.stroke();
                         c.fill();
                         c.closePath();
                     }
@@ -66,31 +77,50 @@
             }
         }
 
-        function ballLimit(){
+        function ballLimit() {
             // ボールの動く範囲を制限(canvasの端)
-            if(ballX >= canvas.width-ballSize || ballX <= 0+ballSize){
-                ballX = 30;
-                ballY = 120;
+            if (ballX >= canvas.width - ballSize || ballX <= 0 + ballSize) {
+                ballX = canvas.width / stage[0].length/2;
+                ballY = canvas.height / stage.length * 1.5;
             }
-            if(ballY >= canvas.height-ballSize || ballY <= 0+ballSize){
-                ballX = 30;
-                ballY = 120;
+            if (ballY >= canvas.height - ballSize || ballY <= 0 + ballSize) {
+                ballX = canvas.width / stage[0].length/2;
+                ballY = canvas.height / stage.length * 1.5;
             }
             // ボールの動く範囲を制限(stageの端)
-           /*for(let i=0; i<stage.length; i++){
-                for(let j=0; j<stage[i].length; j++){
-                    if(stage[i][j] == 1){
-                        if(!(ballX+ballSize <= canvas.width/(stage[i].length)*j || ballX-ballSize >= canvas.width/(stage[i].length)*j)){
-                            ballX = 30;
-                            ballY = 120;
-                        }
-                        if(!(ballY+ballSize <= canvas.height/stage.length*i || ballY-ballSize >= canvas.height/stage.length*i)){
-                            ballX = 30;
-                            ballY = 120;
+            for (let i = 0; i < stage.length; i++) {
+                for (let j = 0; j < stage[i].length; j++) {
+                    if (ballY > canvas.height / stage.length * i && ballY < canvas.height / stage.length * (i + 1)) {
+                        if (ballX > canvas.width / stage[i].length * j && ballX < canvas.width / stage[i].length * (j + 1)) {
+                            console.log(i,j);
+                            if (stage[i][j + 1] == 0) {
+                                if (ballX + ballSize > canvas.width / stage[i].length * (j + 1)) {
+                                    ballX = canvas.width / stage[0].length/2;
+                                    ballY = canvas.height / stage.length * 1.5;
+                                }
+                            }
+                            if (stage[i][j - 1] == 0) {
+                                if (ballX - ballSize < canvas.width / stage[i].length * (j - 1) + canvas.width / stage[i].length * (j - 1)) {
+                                    ballX = canvas.width / stage[0].length/2;
+                                    ballY = canvas.height / stage.length * 1.5;
+                                }
+                            }
+                            if (stage[i+1][j] == 0) {
+                                if (ballY + ballSize > canvas.height / stage.length * (i + 1)) {
+                                    ballX = canvas.width / stage[0].length/2;
+                                    ballY = canvas.height / stage.length * 1.5;
+                                }
+                            }
+                            if (stage[i-1][j] == 0) {
+                                if (ballY - ballSize < canvas.height / stage.length) {
+                                    ballX = canvas.width / stage[0].length/2;
+                                    ballY = canvas.height / stage.length * 1.5;
+                                }
+                            }
                         }
                     }
                 }
-            }*/
+            }
         }
 
         function main() {
@@ -108,7 +138,7 @@
             // ボールを描画
             c.beginPath();
             c.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
-            c.fillStyle = "black";
+            c.fillStyle = "red";
             c.fill();
             c.closePath();
 
