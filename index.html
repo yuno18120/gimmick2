@@ -44,12 +44,12 @@
             canvas.height = document.documentElement.clientHeight - 20;
 
             if (canvas.width / stage[0].length < canvas.height / stage.length) {
-                ballX = canvas.width / stage[0].length/2;
-                ballY = canvas.height / stage.length * 1.5;
+                ballX = canvas.width / stage[0].length * 0.5;
+                ballY = canvas.height / stage.length * 4.5;
                 ballSize = canvas.width / stage[0].length / 4;
             } else {
-                ballX = canvas.width / stage[0].length/2;
-                ballY = canvas.height / stage.length * 1.5;
+                ballX = canvas.width / stage[0].length * 0.5;
+                ballY = canvas.height / stage.length * 4.5;
                 ballSize = canvas.height / stage.length / 4;
             }
         }
@@ -80,11 +80,11 @@
         function ballLimit() {
             // ボールの動く範囲を制限(canvasの端)
             if (ballX >= canvas.width - ballSize || ballX <= 0 + ballSize) {
-                ballX = canvas.width / stage[0].length/2;
+                ballX = canvas.width / stage[0].length * 0.5;
                 ballY = canvas.height / stage.length * 1.5;
             }
             if (ballY >= canvas.height - ballSize || ballY <= 0 + ballSize) {
-                ballX = canvas.width / stage[0].length/2;
+                ballX = canvas.width / stage[0].length / 2;
                 ballY = canvas.height / stage.length * 1.5;
             }
             // ボールの動く範囲を制限(stageの端)
@@ -92,29 +92,38 @@
                 for (let j = 0; j < stage[i].length; j++) {
                     if (ballY > canvas.height / stage.length * i && ballY < canvas.height / stage.length * (i + 1)) {
                         if (ballX > canvas.width / stage[i].length * j && ballX < canvas.width / stage[i].length * (j + 1)) {
-                            console.log(i,j);
                             if (stage[i][j + 1] == 0) {
                                 if (ballX + ballSize > canvas.width / stage[i].length * (j + 1)) {
-                                    ballX = canvas.width / stage[0].length/2;
+                                    console.log("1");
+                                    ballX = canvas.width / stage[0].length * 0.5;
                                     ballY = canvas.height / stage.length * 1.5;
                                 }
                             }
                             if (stage[i][j - 1] == 0) {
-                                if (ballX - ballSize < canvas.width / stage[i].length * (j - 1) + canvas.width / stage[i].length * (j - 1)) {
-                                    ballX = canvas.width / stage[0].length/2;
+                                if (ballX - ballSize < canvas.width / stage[i].length * (j - 1) + canvas.width / stage[i].length) {
+                                    console.log("2");
+                                    ballX = canvas.width / stage[0].length * 0.5;
                                     ballY = canvas.height / stage.length * 1.5;
                                 }
                             }
-                            if (stage[i+1][j] == 0) {
+                            if (stage[i + 1][j] == 0) {
                                 if (ballY + ballSize > canvas.height / stage.length * (i + 1)) {
-                                    ballX = canvas.width / stage[0].length/2;
+                                    console.log("3");
+                                    ballX = canvas.width / stage[0].length * 0.5;
                                     ballY = canvas.height / stage.length * 1.5;
                                 }
                             }
-                            if (stage[i-1][j] == 0) {
-                                if (ballY - ballSize < canvas.height / stage.length) {
-                                    ballX = canvas.width / stage[0].length/2;
-                                    ballY = canvas.height / stage.length * 1.5;
+                            if (stage[i - 1][j] == 0) {
+                                if (i == 0) {
+                                    if (ballY - ballSize < canvas.height / stage.length) {
+                                        ballX = canvas.width / stage[0].length * 0.5;
+                                        ballY = canvas.height / stage.length * 1.5;
+                                    }
+                                } else {
+                                    if (ballY - ballSize < canvas.height / stage.length * (i - 1) + canvas.height / stage.length) {
+                                        ballX = canvas.width / stage[0].length * 0.5;
+                                        ballY = canvas.height / stage.length * 1.5;
+                                    }
                                 }
                             }
                         }
