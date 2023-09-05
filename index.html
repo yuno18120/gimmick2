@@ -178,8 +178,10 @@
                     }
 
                     if (stage[i][j] == 2) {
-                        if (ballY + ballSize > canvas.height / stage.length * (i + 1)) {
-                            screen++;
+                        if (ballY > canvas.height / stage.length * i && ballY < canvas.height / stage.length * (i + 1)) {
+                            if(ballX > canvas.width / stage[i].length * j && ballX < canvas.width / stage[i].length * (j + 1)){
+                                screen++;
+                            }
                         }
                     }
                 }
