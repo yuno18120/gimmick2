@@ -1,11 +1,12 @@
 #t1{
     text-align: center;
-    font-size: 2ch;
+    font-size: 100ch;
+    height: 1000px;
     color: black;
 }
 
 #t2{
     text-align: center;
-    font-size: 2ch;
+    font-size: 25ch;
     color: black;
 }
