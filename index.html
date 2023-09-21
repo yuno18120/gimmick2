@@ -29,7 +29,7 @@
 
         let count = 0;
 
-        let screen = 2;
+        let screen = 1;
 
         let stage =
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -210,8 +210,8 @@
                 c.closePath();
 
                 //速度を計算
-                //ballX += v * (x * (-1));
-                //ballY += v * y;
+                ballX += v * (x * (-1));
+                ballY += v * y;
 
             } else if (screen == 2) {
                 canvas.width = 0;
