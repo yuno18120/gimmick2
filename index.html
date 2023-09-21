@@ -27,7 +27,9 @@
         let ballSize;
         let v = 1;
 
-        let screen = 1;
+        let count = 0;
+
+        let screen = 2;
 
         let stage =
             [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -180,7 +182,7 @@
 
                     if (stage[i][j] == 2) {
                         if (ballY > canvas.height / stage.length * i && ballY < canvas.height / stage.length * (i + 1)) {
-                            if(ballX > canvas.width / stage[i].length * j && ballX < canvas.width / stage[i].length * (j + 1)){
+                            if (ballX > canvas.width / stage[i].length * j && ballX < canvas.width / stage[i].length * (j + 1)) {
                                 screen++;
                             }
                         }
@@ -190,6 +192,9 @@
         }
 
         function main() {
+
+            console.log(ballX,ballY);
+
             if (screen == 1) {
                 drawstage();
 
@@ -205,14 +210,26 @@
                 c.closePath();
 
                 //速度を計算
-                ballX += v * (x * (-1));
-                ballY += v * y;
+                //ballX += v * (x * (-1));
+                //ballY += v * y;
 
             } else if (screen == 2) {
                 canvas.width = 0;
                 canvas.height = 0;
                 document.getElementById("t1").innerText = "clear!!";
                 document.getElementById("t2").innerText = "キーワードは「blood」";
+
+                count++;
+
+                if (count >= 2000) {
+                    count = 0;
+                    screen = 1;
+
+                    ballX = canvas.width / stage[0].length * 0.5;
+                    ballY = canvas.height / stage.length * 1.5;
+
+                    setsize();
+                }
             }
         }
 
