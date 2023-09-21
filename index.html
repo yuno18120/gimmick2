@@ -89,7 +89,7 @@
                     if (stageColor[i][j] == 1) {
                         c.beginPath();
                         c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
-                        c.fillStyle = "red";
+                        c.fillStyle = "rgb(255,0,0,100)";
                         c.strokeStyle = "white";
                         c.lineWidth = 2;
                         c.stroke();
@@ -98,14 +98,14 @@
                     } else if (stageColor[i][j] == 2) {
                         c.beginPath();
                         c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
-                        c.fillStyle = "blue";
+                        c.fillStyle = "rgb(0,0,255,100)";
                         c.stroke();
                         c.fill();
                         c.closePath();
                     } else if (stageColor[i][j] == 3 || stageColor[i][j] == 4) {
                         c.beginPath();
                         c.rect(canvas.width / (stage[i].length) * j, canvas.height / (stage.length) * i, canvas.width / (stage[i].length), canvas.height / (stage.length));
-                        c.fillStyle = "yellow";
+                        c.fillStyle = "rgb(255,255,0,100)";
                         c.stroke();
                         c.fill();
                         c.closePath();
